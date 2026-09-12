@@ -1,0 +1,11 @@
+.DS_Store
+build/
+docs/landing/
+docs/demo/
+design/scratch/
+
+# Working notes that stay local
+PLAN.md
+AGENTS.md
+CLAUDE.md
+docs/design-spec.md

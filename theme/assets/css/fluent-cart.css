@@ -1,0 +1,553 @@
+/*
+ * Uranium: FluentCart.
+ *
+ * FluentCart builds its colors from --fct-* variables declared on :root.
+ * Redefining them on body maps every FluentCart screen to Uranium tokens,
+ * and dark mode follows because the tokens change. The rules below the
+ * variables square off and restyle the pieces the variables don't reach.
+ */
+
+body {
+	--u-fct-rule: color-mix(in srgb, var(--wp--preset--color--ink) 18%, transparent);
+
+	/* Shared */
+	--fct-primary-text-color: var(--wp--preset--color--ink);
+	--fct-secondary-text-color: var(--wp--preset--color--muted);
+	--fct-heading-color: var(--wp--preset--color--ink);
+	--fct-border-color: var(--u-fct-rule);
+	--fct-active-border-color: var(--wp--preset--color--ink);
+	--fct-adv-border-color: var(--u-control);
+	--fct-btn-bg-color: var(--wp--preset--color--signal);
+	--fct-btn-text-color: var(--wp--preset--color--on-signal);
+	--fct-btn-border-color: var(--wp--preset--color--signal);
+	--fct-direct-btn-bg-color: var(--wp--preset--color--signal);
+	--fct-direct-btn-text-color: var(--wp--preset--color--on-signal);
+	--fct-add-to-cart-btn-bg-color: transparent;
+	--fct-add-to-cart-btn-border-color: var(--u-control);
+	--fct-add-to-cart-btn-hover-bg-color: var(--wp--preset--color--surface);
+	--fct-add-to-cart-btn-text-color: var(--wp--preset--color--ink);
+	--fct-select-dropdown-bg: var(--wp--preset--color--paper);
+	--fct-select-input-bg: var(--wp--preset--color--paper);
+	--fct-select-input-text-color: var(--wp--preset--color--ink);
+	--fct-select-option-hover-bg: var(--wp--preset--color--surface);
+
+	/* Product cards */
+	--fct-card-bg: transparent;
+	--fct-card-border-color: transparent;
+	--fct-card-btn-bg-color: transparent;
+	--fct-card-btn-text-color: var(--wp--preset--color--ink);
+	--fct-card-primary-text-color: var(--wp--preset--color--ink);
+	--fct-card-text-color: var(--wp--preset--color--muted);
+	--fct-product-list-columns: 3;
+	--fct-related-product-columns: 3;
+
+	/* Shop app */
+	--fct-shop-primary-text-color: var(--wp--preset--color--ink);
+	--fct-shop-secondary-text-color: var(--wp--preset--color--muted);
+	--fct-shop-primary-bg-color: var(--wp--preset--color--paper);
+	--fct-shop-secondary-bg-color: var(--wp--preset--color--surface);
+	--fct-shop-border-color: var(--u-fct-rule);
+	--fct-shop-divider-color: var(--u-fct-rule);
+	--fct-shop-input-bg: var(--wp--preset--color--paper);
+	--fct-shop-input-border: var(--u-control);
+	--fct-shop-btn-bg-color: var(--wp--preset--color--signal);
+	--fct-shop-btn-text-color: var(--wp--preset--color--on-signal);
+	--fct-shop-checkmark-bg: var(--wp--preset--color--paper);
+	--fct-shop-checkmark-border-color: var(--u-control);
+	--fct-shop-checkmark-active-bg: var(--wp--preset--color--ink);
+	--fct-shop-checkmark-active-border-color: var(--wp--preset--color--ink);
+	--fct-shop-checkmark-check-border-color: var(--wp--preset--color--paper);
+	--fct-shop-view-switcher-color: var(--wp--preset--color--muted);
+	--fct-shop-view-switcher-active-bg: var(--wp--preset--color--surface);
+	--fct-shop-paginator-bg: var(--wp--preset--color--paper);
+	--fct-shop-paginator-border-color: var(--u-control);
+	--fct-shop-paginator-items-color: var(--wp--preset--color--ink);
+	--fct-shop-paginator-items-hover-bg: var(--wp--preset--color--surface);
+	--fct-shop-paginator-items-active-bg: var(--wp--preset--color--ink);
+	--fct-shop-paginator-items-active-color: var(--wp--preset--color--paper);
+
+	/* Single product */
+	--fct-single-product-primary-text-color: var(--wp--preset--color--ink);
+	--fct-single-product-secondary-text-color: var(--wp--preset--color--muted);
+	--fct-single-product-border-color: var(--u-fct-rule);
+	--fct-single-product-active-border-color: var(--wp--preset--color--ink);
+	--fct-single-product-qty-bg: var(--wp--preset--color--paper);
+	--fct-single-product-qty-text-color: var(--wp--preset--color--ink);
+
+	/* Cart drawer */
+	--fct-cart-drawer-bg: var(--wp--preset--color--paper);
+	--fct-cart-drawer-border-color: var(--u-fct-rule);
+	--fct-cart-drawer-primary-bg-color: var(--wp--preset--color--surface);
+	--fct-cart-drawer-primary-text-color: var(--wp--preset--color--ink);
+	--fct-cart-drawer-secondary-text-color: var(--wp--preset--color--muted);
+	--fct-cart-drawer-btn-bg-color: var(--wp--preset--color--signal);
+	--fct-cart-drawer-btn-border-color: var(--wp--preset--color--signal);
+	--fct-cart-drawer-btn-text-color: var(--wp--preset--color--on-signal);
+	--fct-cart-drawer-badge-bg-color: var(--wp--preset--color--signal);
+	--fct-cart-drawer-badge-text-color: var(--wp--preset--color--on-signal);
+	--fct-cart-drawer-close-btn-color: var(--wp--preset--color--ink);
+	--fct-cart-drawer-footer-action-bg-color: var(--wp--preset--color--surface);
+	--fct-cart-drawer-open-btn-bg-color: var(--wp--preset--color--ink);
+	--fct-cart-drawer-quantity-bg-color: var(--wp--preset--color--paper);
+	--fct-cart-drawer-quantity-border-color: var(--u-control);
+	--fct-cart-drawer-quantity-btn-bg: transparent;
+	--fct-cart-drawer-quantity-btn-color: var(--wp--preset--color--ink);
+	--fct-cart-drawer-quantity-btn-hover-bg: var(--wp--preset--color--surface);
+	--fct-cart-drawer-quantity-color: var(--wp--preset--color--ink);
+	--fct-cart-item-delete-btn-bg-color: transparent;
+	--fct-cart-item-delete-btn-border-color: var(--u-control);
+	--fct-cart-item-delete-btn-color: var(--wp--preset--color--muted);
+	--fct-cart-item-delete-btn-hover-bg-color: var(--wp--preset--color--surface);
+	--fct-view-cart-btn-bg-color: var(--wp--preset--color--signal);
+	--fct-view-cart-drawer-btn-color: var(--wp--preset--color--ink);
+	--fct-view-cart-drawer-btn-border-color: var(--u-control);
+	--fct-view-cart-drawer-btn-hover-bg: var(--wp--preset--color--surface);
+
+	/* Checkout */
+	--fct-checkout-primary-bg-color: var(--wp--preset--color--paper);
+	--fct-checkout-secondary-bg-color: var(--wp--preset--color--surface);
+	--fct-checkout-primary-text-color: var(--wp--preset--color--ink);
+	--fct-checkout-secondary-text-color: var(--wp--preset--color--muted);
+	--fct-checkout-border-color: var(--u-fct-rule);
+	--fct-checkout-active-border-color: var(--wp--preset--color--ink);
+	--fct-checkout-address-active-border-color: var(--wp--preset--color--ink);
+	--fct-checkout-address-modal-bg: var(--wp--preset--color--paper);
+	--fct-checkout-address-wrapper-bg: var(--wp--preset--color--paper);
+	--fct-checkout-btn-bg-color: var(--wp--preset--color--signal);
+	--fct-checkout-btn-text-color: var(--wp--preset--color--on-signal);
+	--fct-checkout-checkbox-bg: var(--wp--preset--color--paper);
+	--fct-checkout-input-bg-color: var(--wp--preset--color--paper);
+	--fct-checkout-input-border-color: var(--u-control);
+	--fct-checkout-input-disabled-bg-color: var(--wp--preset--color--surface);
+	--fct-checkout-input-placeholder-text-color: var(--wp--preset--color--muted);
+	--fct-checkout-input-text-color: var(--wp--preset--color--ink);
+	--fct-checkout-payment-method-bg-color: var(--wp--preset--color--paper);
+	--fct-checkout-radio-bg-color: var(--wp--preset--color--paper);
+	--fct-checkout-radio-border-color: var(--u-control);
+	--fct-checkout-radio-active-bg-color: var(--wp--preset--color--ink);
+	--fct-checkout-radio-active-border-color: var(--wp--preset--color--ink);
+	--fct-checkout-radio-dot-bg-color: var(--wp--preset--color--paper);
+	--fct-checkout-shipping-methods-bg: var(--wp--preset--color--paper);
+	--fct-checkout-summary-bg-color: var(--wp--preset--color--surface);
+	--fct-modal-checkout-border-radius: var(--u-radius);
+	--fct-modal-checkout-primary-bg-color: var(--wp--preset--color--paper);
+	--fct-modal-checkout-primary-text-color: var(--wp--preset--color--ink);
+	--fct-modal-checkout-secondary-text-color: var(--wp--preset--color--muted);
+	--fct-modal-checkout-border-color: var(--u-fct-rule);
+	--fct-modal-checkout-divider-color: var(--u-fct-rule);
+	--fct-modal-checkout-active-border-color: var(--wp--preset--color--ink);
+	--fct-modal-checkout-active-text-color: var(--wp--preset--color--ink);
+	--fct-modal-checkout-secondary-active-border-color: var(--wp--preset--color--ink);
+	--fct-modal-checkout-btn-bg-color: var(--wp--preset--color--signal);
+	--fct-modal-checkout-btn-text-color: var(--wp--preset--color--on-signal);
+	--fct-modal-checkout-input-disabled-bg: var(--wp--preset--color--surface);
+
+	/* Customer dashboard */
+	--fct-customer-dashboard-title-color: var(--wp--preset--color--ink);
+	--fct-customer-dashboard-sub-title-color: var(--wp--preset--color--muted);
+	--fct-customer-dashboard-text-color: var(--wp--preset--color--ink);
+	--fct-customer-dashboard-primary-text-color: var(--wp--preset--color--ink);
+	--fct-customer-dashboard-secondary-text-color: var(--wp--preset--color--muted);
+	--fct-customer-dashboard-border-color: var(--u-fct-rule);
+	--fct-customer-dashboard-divider-color: var(--u-fct-rule);
+	--fct-customer-dashboard-btn-bg-color: var(--wp--preset--color--signal);
+	--fct-customer-dashboard-btn-border-color: var(--wp--preset--color--signal);
+	--fct-customer-dashboard-btn-text-color: var(--wp--preset--color--on-signal);
+	--fct-customer-dashboard-logout-btn-bg-color: transparent;
+	--fct-customer-dashboard-logout-btn-hover-bg-color: var(--wp--preset--color--surface);
+	--fct-customer-dashboard-logout-btn-text-color: var(--wp--preset--color--ink);
+	--fct-customer-dashboard-nav-text-color: var(--wp--preset--color--muted);
+	--fct-customer-dashboard-nav-active-text-color: var(--wp--preset--color--ink);
+	--fct-customer-dashboard-nav-active-bg-color: var(--wp--preset--color--surface);
+	--fct-customer-dashboard-nav-active-bar-color: var(--wp--preset--color--ink);
+	--fct-customer-dashboard-paginator-text-color: var(--wp--preset--color--ink);
+
+	/* Carousel */
+	--fct-carousel-primary: var(--wp--preset--color--ink);
+	--fct-carousel-primary-light: var(--wp--preset--color--surface);
+	--fct-carousel-secondary: var(--wp--preset--color--muted);
+	--fct-carousel-active-color: var(--wp--preset--color--ink);
+	--fct-carousel-bg: var(--wp--preset--color--paper);
+	--fct-carousel-border: var(--u-fct-rule);
+	--fct-carousel-border-subtle: var(--u-fct-rule);
+	--fct-carousel-border-emphasis: var(--wp--preset--color--ink);
+	--fct-carousel-border-radius: 0;
+	--fct-carousel-border-radius-sm: var(--u-radius);
+	--fct-carousel-shadow-sm: none;
+	--fct-carousel-shadow-md: none;
+	--fct-carousel-shadow-lg: none;
+	--fct-carousel-hover-lift: 0;
+	--fct-carousel-dot-active: var(--wp--preset--color--ink);
+	--fct-carousel-dot-inactive: var(--u-fct-rule);
+}
+
+/* Page shell --------------------------------------------------------------- */
+
+/* The page heading already spaces empty cart and checkout states. */
+:is(.fluent-cart-cart-empty-content, .fct-empty-cart, .fluent-cart-checkout-page-empty-cart) {
+	padding-top: 0 !important;
+}
+
+.u-fct--single,
+.u-fct--archive {
+	padding-block: 48px var(--u-section);
+}
+
+.u-fct--single > .u-breadcrumbs {
+	margin-bottom: 32px;
+}
+
+.u-fct .fct-archive-header-wrap {
+	display: none;
+}
+
+.u-fct__content {
+	padding-block: 0 var(--u-section);
+}
+
+.u-fct__content:empty {
+	display: none;
+}
+
+.u-fct__related {
+	padding-block: 0 var(--u-section);
+}
+
+/* Shop grid and product cards -------------------------------------------- */
+
+.fct-products-container {
+	gap: 48px 32px !important;
+}
+
+.fct-product-card {
+	padding: 0 !important;
+	background: transparent !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	text-align: start;
+}
+
+.fct-product-card-image-wrap {
+	position: relative;
+	display: grid !important;
+	place-items: center;
+	aspect-ratio: 4 / 3;
+	height: auto !important;
+	margin: 0 0 20px !important;
+	overflow: hidden;
+	background: var(--u-plate) !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+}
+
+.fct-product-card-image {
+	width: 87% !important;
+	height: 85% !important;
+	object-fit: contain !important;
+	mix-blend-mode: multiply;
+	transition: transform 240ms ease;
+}
+
+.fct-product-card:hover .fct-product-card-image {
+	transform: scale(1.035);
+}
+
+.fct-product-card-title,
+.fct-product-card-title a {
+	margin: 0;
+	padding: 0 !important;
+	color: var(--wp--preset--color--ink) !important;
+	font-family: var(--u-condensed) !important;
+	font-size: clamp(1.375rem, 1.9vw, 1.75rem) !important;
+	font-weight: 600 !important;
+	line-height: 1.15 !important;
+	text-decoration: none;
+}
+
+.fct-product-card:hover .fct-product-card-title a {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.15em;
+}
+
+.fct-product-card-prices {
+	margin-top: 12px;
+	padding: 0 !important;
+	color: var(--wp--preset--color--ink);
+	font-size: 1rem !important;
+	font-weight: 500;
+}
+
+.fct-compare-price {
+	color: var(--wp--preset--color--muted) !important;
+	font-weight: 400;
+}
+
+.fct-product-card .wp-block-fluent-cart-shopapp-product-buttons {
+	padding: 0 !important;
+	margin-top: 18px;
+}
+
+/* Archive cards print the button straight after the price, without the wrapper. */
+.fct-product-card .fct-product-card-prices + :is(button, a, div) {
+	margin-top: 18px !important;
+}
+
+.fct-product-view-button,
+.fct-product-card .fluent-cart-add-to-cart-button {
+	width: auto !important;
+	min-height: 44px;
+	padding: 10px 18px !important;
+	background: transparent !important;
+	border: 1px solid var(--u-control) !important;
+	border-radius: var(--u-radius) !important;
+	box-shadow: none !important;
+	color: var(--wp--preset--color--ink) !important;
+	font-size: 0.9375rem !important;
+	font-weight: 500 !important;
+}
+
+.fct-product-view-button:hover,
+.fct-product-card .fluent-cart-add-to-cart-button:hover {
+	background: var(--u-hover) !important;
+	border-color: currentColor !important;
+}
+
+.fct-sorting-label,
+.fct-shop-filter-toggle-button,
+.fct-shop-view-switcher button {
+	color: var(--wp--preset--color--ink) !important;
+}
+
+.fct-shop-filter-toggle-button,
+.fct-shop-view-switcher button,
+.fct-shop-input,
+.fct-shop-filter-wrapper :is(input, select, button) {
+	border-radius: var(--u-radius) !important;
+}
+
+/* Single product -------------------------------------------------------- */
+
+.fct-single-product-page-row {
+	display: grid !important;
+	grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+	align-items: start;
+	gap: 32px 64px !important;
+}
+
+.fct-single-product-page-row > * {
+	width: auto !important;
+	max-width: none !important;
+	margin: 0 !important;
+}
+
+.fct-product-gallery-wrapper {
+	padding: 36px !important;
+	background: var(--u-plate) !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+}
+
+.fct-product-gallery-wrapper * {
+	border-radius: 0 !important;
+}
+
+.fct-product-gallery-wrapper img {
+	mix-blend-mode: multiply;
+}
+
+.fct-product-gallery-wrapper :is(.fct-product-gallery-thumb, [class*="gallery-main"], [class*="featured"]) {
+	background: transparent !important;
+	border-color: transparent !important;
+}
+
+.fct-gallery-thumb-control-button {
+	width: 76px !important;
+	height: 76px !important;
+	background: #fff !important;
+	border-radius: var(--u-radius) !important;
+}
+
+.fct-product-summary {
+	display: flex;
+	flex-direction: column;
+}
+
+.fct-product-summary > .fct-product-meta {
+	order: -1;
+	margin: 0 0 16px !important;
+}
+
+.fct-product-sku {
+	color: var(--wp--preset--color--ink) !important;
+	font: 400 0.75rem/1.6 var(--u-mono) !important;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.fct-product-title {
+	margin: 0 0 20px !important;
+}
+
+.fct-product-title :is(h1, h2),
+.fct-single-product-page #fct-product-summary-title {
+	max-width: 14ch;
+	margin: 0 !important;
+	color: var(--wp--preset--color--ink) !important;
+	font-family: var(--u-condensed) !important;
+	font-size: clamp(2.5rem, 4.2vw, 4.4rem) !important;
+	font-weight: 600 !important;
+	line-height: 1.03 !important;
+	text-wrap: balance;
+}
+
+.fct-product-variants [data-fluent-cart-product-variant] {
+	border-radius: var(--u-radius) !important;
+	box-shadow: none !important;
+}
+
+.fct-product-excerpt {
+	color: var(--wp--preset--color--muted) !important;
+	font-size: 1.0625rem !important;
+	line-height: 1.6 !important;
+}
+
+.fct-product-prices,
+.fct-price-range {
+	margin-top: 24px;
+	color: var(--wp--preset--color--ink) !important;
+	font-size: 1.25rem !important;
+	font-weight: 500 !important;
+}
+
+.fct-product-quantity {
+	min-height: 56px;
+	background: var(--wp--preset--color--paper) !important;
+	border: 1px solid var(--u-control) !important;
+	border-radius: var(--u-radius) !important;
+}
+
+.fct-product-buttons-wrap {
+	gap: 12px !important;
+}
+
+.fct-product-buttons-wrap :is(.fluent-cart-direct-checkout-button, .fluent-cart-add-to-cart-button) {
+	min-height: 56px;
+	border-radius: var(--u-radius) !important;
+	box-shadow: none !important;
+	font-size: 1rem !important;
+	font-weight: 500 !important;
+}
+
+.fct-product-buttons-wrap .fluent-cart-direct-checkout-button {
+	background: var(--wp--preset--color--signal) !important;
+	border: 1px solid var(--wp--preset--color--signal) !important;
+	color: var(--wp--preset--color--on-signal) !important;
+}
+
+.fct-product-buttons-wrap .fluent-cart-direct-checkout-button:hover {
+	background: var(--wp--custom--color--signal-hover) !important;
+	border-color: var(--wp--custom--color--signal-hover) !important;
+}
+
+.fct-product-buttons-wrap .fluent-cart-add-to-cart-button {
+	background: transparent !important;
+	border: 1px solid var(--u-control) !important;
+	color: var(--wp--preset--color--ink) !important;
+}
+
+.fct-product-buttons-wrap .fluent-cart-add-to-cart-button:hover {
+	background: var(--u-hover) !important;
+	border-color: currentColor !important;
+}
+
+@media (max-width: 900px) {
+	.fct-single-product-page-row {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.fct-product-gallery-wrapper {
+		padding: 20px !important;
+	}
+}
+
+/* FluentCart pads the grid below 1280px; the theme's gutter already does that job. */
+.fct-products-wrapper {
+	padding-inline: 0 !important;
+}
+
+/* On the shop page the filter toggle stands alone, so its label lines up with the heading. */
+.fct-products-wrapper > .fct-shop-filter-toggle-button {
+	padding-inline-start: 0 !important;
+}
+
+/* Header: account and mini-cart --------------------------------------------- */
+
+.u-actions .fct-customer-dashboard-btn,
+.u-actions .fct-mini-cart-button {
+	position: relative;
+	display: inline-grid !important;
+	place-content: center;
+	place-items: center;
+	width: 48px;
+	height: 48px;
+	min-height: 48px;
+	padding: 0 !important;
+	background: transparent !important;
+	border: 0 !important;
+	border-radius: var(--u-radius);
+	color: inherit !important;
+	cursor: pointer;
+}
+
+.u-actions .fct-customer-dashboard-btn:hover,
+.u-actions .fct-mini-cart-button:hover {
+	background: var(--u-hover) !important;
+}
+
+.u-actions .fct-customer-dashboard-btn::after {
+	display: none !important;
+}
+
+.u-actions .fct-customer-dashboard-btn > span:not(.fct-customer-dashboard-icon),
+.u-actions .fct-mini-cart-amount {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/* FluentCart's icons are drawn heavier than core's, so they run smaller to match. */
+.u-actions :is(.fct-customer-dashboard-icon, .fct-mini-cart-wrap) {
+	display: grid;
+	place-items: center;
+	width: 22px;
+	height: 22px;
+}
+
+.u-actions :is(.fct-customer-dashboard-icon, .fct-mini-cart-wrap) svg {
+	width: 22px !important;
+	height: 22px !important;
+}
+
+.u-actions .wp-block-fluent-cart-mini-cart {
+	margin: 0;
+}
+
+@media (max-width: 800px) {
+	.u-actions .fct-customer-dashboard-btn,
+	.u-actions .fct-mini-cart-button {
+		width: 44px;
+		height: 44px;
+		min-height: 44px;
+	}
+}
+
+@media (max-width: 480px) {
+	.u-actions .fct-customer-dashboard-btn {
+		display: none !important;
+	}
+}

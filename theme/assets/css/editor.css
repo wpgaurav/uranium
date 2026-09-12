@@ -1,0 +1,20 @@
+/*
+ * Editor-only adjustments. The front-end stylesheet (uranium.css) also
+ * loads in the editor, so this file only covers what the canvas needs
+ * differently.
+ */
+
+/* The toggle is hidden until the front-end script runs; keep it editable here. */
+.editor-styles-wrapper .u-mode-toggle {
+	display: flex !important;
+}
+
+/* Keep full-width patterns readable while they're selected. */
+.editor-styles-wrapper .u-hero__panel,
+.editor-styles-wrapper .u-spec-strip {
+	min-height: 0;
+}
+
+.editor-styles-wrapper .wp-block-cover .u-tile {
+	position: absolute;
+}
