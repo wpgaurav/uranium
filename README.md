@@ -3,7 +3,7 @@
 Uranium is a hybrid WordPress theme for industrial companies: manufacturers, equipment makers, parts distributors, engineering firms and field-service teams. It's built for sites that show a technical catalog, take quote requests and sell parts online.
 
 - **Demos:** [WooCommerce store](https://demo.gatilab.com/uranium/) and [FluentCart store](https://demo.gatilab.com/uranium-fluentcart/)
-- **Download:** [uranium-0.1.0.zip](https://github.com/wpgaurav/uranium/releases/download/v0.1.0/uranium-0.1.0.zip)
+- **Download:** [uranium-0.1.1.zip](https://github.com/wpgaurav/uranium/releases/download/v0.1.1/uranium-0.1.1.zip)
 - **Requires:** WordPress 6.8 or later (tested up to 7.1) and PHP 8.1 or later
 
 ## What's inside

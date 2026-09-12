@@ -1047,6 +1047,23 @@ p.demo_store {
 	gap: 48px 32px !important;
 }
 
+/*
+ * WooCommerce sizes its responsive columns for a 1.25em gap. With the wider
+ * 32px gap the same math only fits one column fewer, so the tracks are
+ * resized here for the real gap.
+ */
+.u-wc-rail .wc-block-product-template__responsive.columns-2 {
+	grid-template-columns: repeat(auto-fill, minmax(max(150px, calc(50% - 16px)), 1fr));
+}
+
+.u-wc-rail .wc-block-product-template__responsive.columns-3 {
+	grid-template-columns: repeat(auto-fill, minmax(max(150px, calc(33.33333% - 21.33334px)), 1fr));
+}
+
+.u-wc-rail .wc-block-product-template__responsive.columns-4 {
+	grid-template-columns: repeat(auto-fill, minmax(max(150px, calc(25% - 24px)), 1fr));
+}
+
 .u-wc-rail .wc-block-product {
 	text-align: start;
 }

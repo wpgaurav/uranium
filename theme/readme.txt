@@ -3,7 +3,7 @@ Contributors: gauravtiwari
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: e-commerce, one-column, two-columns, three-columns, four-columns, left-sidebar, wide-blocks, block-patterns, block-styles, custom-colors, custom-logo, custom-menu, editor-style, featured-images, full-width-template, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
@@ -51,6 +51,9 @@ No. When a page opens with one of Uranium's hero or heading patterns, the defaul
 No. Both are optional. Uranium styles whichever one is active, and both can run side by side.
 
 == Changelog ==
+
+= 0.1.1 =
+* Fixed: the WooCommerce product rail pattern fits three products in a row again. Its wider spacing had broken WooCommerce's column sizing, so only two fit.
 
 = 0.1.0 =
 * First release.
