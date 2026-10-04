@@ -327,6 +327,22 @@ body {
 	border-radius: var(--u-radius) !important;
 }
 
+/*
+ * FluentCart fades struck-through prices to half opacity and prints the price
+ * filter's values in a fixed dark blue. Both fall below AA, the second badly in
+ * dark mode, so they take the muted and ink tokens instead.
+ */
+.fct-product-card del,
+.fct-product-prices del {
+	color: var(--wp--preset--color--muted) !important;
+	opacity: 1 !important;
+}
+
+body .fc_price_range_input {
+	background: transparent !important;
+	color: var(--wp--preset--color--ink) !important;
+}
+
 /* Single product -------------------------------------------------------- */
 
 .fct-single-product-page-row {
@@ -365,7 +381,7 @@ body {
 .fct-gallery-thumb-control-button {
 	width: 76px !important;
 	height: 76px !important;
-	background: #fff !important;
+	background: var(--wp--custom--color--plate-light) !important;
 	border-radius: var(--u-radius) !important;
 }
 

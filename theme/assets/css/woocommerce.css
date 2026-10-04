@@ -117,16 +117,36 @@
 	background: currentColor;
 	-webkit-mask: var(--u-i-arrow) center / 24px no-repeat;
 	mask: var(--u-i-arrow) center / 24px no-repeat;
-	transition: transform var(--u-ease);
+	scale: var(--u-dir) 1;
+	transition: translate var(--u-ease);
 }
 
 .woocommerce .single_add_to_cart_button:hover::after,
 .woocommerce a.checkout-button:hover::after {
-	transform: translateX(3px);
+	translate: calc(var(--u-dir) * 3px) 0;
 }
 
-.woocommerce :is(a.button, button.button, input.button):is(:disabled, .disabled, [disabled]) {
-	opacity: 0.5;
+/*
+ * Disabled buttons switch to the outline look with muted text instead of
+ * fading to half opacity, so the label still reads at AA. The variable
+ * product button stays clickable while it waits for options, because
+ * WooCommerce answers that click with a "choose an option" message.
+ *
+ * The button rules above list `#respond input#submit` inside :is(), which
+ * gives every store button ID-level specificity. This rule lists it too, so
+ * it can win over the filled and hover states.
+ */
+.woocommerce :is(a.button, button.button, input.button, #respond input#submit):is(:disabled, .disabled, [disabled]),
+.woocommerce :is(a.button, button.button, input.button, #respond input#submit):is(:disabled, .disabled, [disabled]):hover {
+	background: transparent;
+	border-color: var(--u-control);
+	color: var(--u-muted);
+	cursor: not-allowed;
+	opacity: 1;
+}
+
+.woocommerce :is(a.button, button.button, input.button):is(:disabled, [disabled]),
+.woocommerce a.button.disabled {
 	pointer-events: none;
 }
 
@@ -264,8 +284,9 @@
 
 .u-wc-plate__arrow {
 	position: absolute;
-	right: 16px;
-	bottom: 16px;
+	inset-inline-end: 16px;
+	inset-block-end: 16px;
+	scale: var(--u-dir) 1;
 	width: 24px;
 	height: 24px;
 	background: var(--u-plate-ink);
@@ -276,8 +297,7 @@
 .woocommerce span.onsale {
 	position: absolute;
 	top: 16px;
-	left: 16px;
-	right: auto;
+	inset-inline: 16px auto;
 	z-index: 2;
 	min-width: 0;
 	min-height: 0;
@@ -293,8 +313,7 @@
 
 .woocommerce ul.products li.product .onsale {
 	top: 16px;
-	left: 16px;
-	right: auto;
+	inset-inline: 16px auto;
 	margin: 0;
 }
 
@@ -414,7 +433,7 @@
 
 .woocommerce div.product > span.onsale {
 	top: 16px;
-	left: 16px;
+	inset-inline: 16px auto;
 }
 
 .woocommerce div.product div.images.woocommerce-product-gallery {
@@ -443,7 +462,7 @@
 .woocommerce div.product div.images .flex-control-thumbs li img {
 	border: 1px solid color-mix(in srgb, var(--u-plate-ink) 22%, transparent);
 	border-radius: var(--u-radius);
-	background: #fff;
+	background: var(--wp--custom--color--plate-light);
 	opacity: 0.75;
 }
 
@@ -455,10 +474,10 @@
 
 .woocommerce div.product div.images .woocommerce-product-gallery__trigger {
 	top: 16px;
-	right: 16px;
+	inset-inline: auto 16px;
 	width: 44px;
 	height: 44px;
-	background: #fff;
+	background: var(--wp--custom--color--plate-light);
 	border-radius: var(--u-radius);
 }
 
@@ -1042,6 +1061,16 @@ p.demo_store {
 	font: 500 0.6875rem/1 var(--wp--preset--font-family--sans);
 }
 
+/*
+ * WooCommerce hides the closed Mini-Cart drawer with opacity alone, so its
+ * buttons stay in the tab order on every page. Hiding it for real takes them
+ * out; the delay lets the closing fade finish first.
+ */
+.wc-block-components-drawer__screen-overlay--is-hidden {
+	visibility: hidden;
+	transition: opacity 0.3s, visibility 0s linear 0.3s;
+}
+
 /* Product rail pattern (Product Collection block) */
 .u-wc-rail .wc-block-product-template {
 	gap: 48px 32px !important;
@@ -1204,4 +1233,16 @@ p.demo_store {
 	color: var(--u-muted);
 	font-size: 0.875rem;
 	font-variant-numeric: tabular-nums;
+}
+
+/* Motion --------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+	.woocommerce :is(.single_add_to_cart_button, a.checkout-button)::after {
+		translate: none !important;
+	}
+
+	.woocommerce ul.products li.product .u-wc-plate img {
+		transform: none !important;
+	}
 }

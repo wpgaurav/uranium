@@ -21,14 +21,16 @@ uranium_page_heading(
 		'intro' => uranium_archive_intro(),
 	)
 );
+
+$uranium_cards = 'cards' === uranium_blog_layout();
 ?>
 <div class="u-wrap u-listing">
 	<?php if ( have_posts() ) : ?>
-		<div class="u-post-rows">
+		<div class="<?php echo $uranium_cards ? 'u-post-cards' : 'u-post-rows'; ?>">
 			<?php
 			while ( have_posts() ) :
 				the_post();
-				get_template_part( 'template-parts/content', 'row' );
+				get_template_part( 'template-parts/content', $uranium_cards ? 'card' : 'row' );
 			endwhile;
 			?>
 		</div>

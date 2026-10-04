@@ -39,12 +39,13 @@ function uranium_setup() {
 	/*
 	 * The header uses the Navigation block. When no navigation menu exists
 	 * yet, WordPress builds its fallback from the classic menu assigned to
-	 * this location, so sites moving from a classic theme keep their menu.
+	 * the primary location, so sites moving from a classic theme keep their
+	 * menu. A menu in the footer location replaces the footer's legal links.
 	 */
 	register_nav_menus(
 		array(
 			'primary' => __( 'Primary menu', 'uranium' ),
-			'footer'  => __( 'Footer menu', 'uranium' ),
+			'footer'  => __( 'Footer legal links', 'uranium' ),
 		)
 	);
 
@@ -55,6 +56,74 @@ function uranium_setup() {
 	add_post_type_support( 'page', 'excerpt' );
 }
 add_action( 'after_setup_theme', 'uranium_setup' );
+
+/**
+ * Starter content for a new site: the six page layouts as real pages, a
+ * static front page, a posts page and a primary menu. WordPress only offers
+ * it in the Customizer of a fresh install.
+ */
+function uranium_starter_content() {
+	$pages = array(
+		'home'      => array( _x( 'Home', 'starter page title', 'uranium' ), 'page-home' ),
+		'solutions' => array( _x( 'Industries', 'starter page title', 'uranium' ), 'page-solutions' ),
+		'services'  => array( _x( 'Services', 'starter page title', 'uranium' ), 'page-services' ),
+		'support'   => array( _x( 'Support', 'starter page title', 'uranium' ), 'page-support' ),
+		'company'   => array( _x( 'Company', 'starter page title', 'uranium' ), 'page-company' ),
+		'contact'   => array( _x( 'Contact', 'starter page title', 'uranium' ), 'page-contact' ),
+	);
+
+	$posts = array(
+		'blog' => array(
+			'post_type'  => 'page',
+			'post_title' => _x( 'Blog', 'starter page title', 'uranium' ),
+			'post_name'  => 'blog',
+		),
+	);
+	$items = array();
+
+	foreach ( $pages as $key => $page ) {
+		$posts[ $key ] = array(
+			'post_type'    => 'page',
+			'post_title'   => $page[0],
+			'post_name'    => $key,
+			'post_content' => '<!-- wp:pattern {"slug":"uranium/' . $page[1] . '"} /-->',
+			'template'     => 'home' === $key ? '' : 'page-templates/full-width.php',
+		);
+
+		if ( 'home' !== $key ) {
+			$items[ 'page_' . $key ] = array(
+				'type'      => 'post_type',
+				'object'    => 'page',
+				'object_id' => '{{' . $key . '}}',
+			);
+		}
+	}
+
+	$items['page_blog'] = array(
+		'type'      => 'post_type',
+		'object'    => 'page',
+		'object_id' => '{{blog}}',
+	);
+
+	add_theme_support(
+		'starter-content',
+		array(
+			'posts'     => $posts,
+			'options'   => array(
+				'show_on_front'  => 'page',
+				'page_on_front'  => '{{home}}',
+				'page_for_posts' => '{{blog}}',
+			),
+			'nav_menus' => array(
+				'primary' => array(
+					'name'  => __( 'Primary menu', 'uranium' ),
+					'items' => $items,
+				),
+			),
+		)
+	);
+}
+add_action( 'after_setup_theme', 'uranium_starter_content', 20 );
 
 /**
  * Sets the content width for embeds and images.

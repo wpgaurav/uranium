@@ -13,7 +13,7 @@ uranium_page_heading(
 		'title'  => sprintf( __( 'Results for "%s"', 'uranium' ), esc_html( get_search_query() ) ),
 		'intro'  => have_posts()
 			/* translators: %d: number of results. */
-			? sprintf( _n( '%d page matched your search.', '%d pages matched your search.', (int) $wp_query->found_posts, 'uranium' ), (int) $wp_query->found_posts )
+			? sprintf( _n( '%d result matches your search.', '%d results match your search.', (int) $wp_query->found_posts, 'uranium' ), (int) $wp_query->found_posts )
 			: '',
 		'search' => true,
 	)

@@ -33,6 +33,7 @@ function uranium_register_block_styles() {
 			'label' => __( 'Mono label', 'uranium' ),
 			'meta'  => __( 'Mono meta', 'uranium' ),
 			'note'  => __( 'Status note', 'uranium' ),
+			'badge' => __( 'Badge', 'uranium' ),
 		),
 		'core/heading'       => array(
 			'display' => __( 'Display', 'uranium' ),
@@ -41,10 +42,12 @@ function uranium_register_block_styles() {
 			'plate' => __( 'Product plate', 'uranium' ),
 		),
 		'core/table'         => array(
-			'spec' => __( 'Spec table', 'uranium' ),
+			'spec'       => __( 'Spec table', 'uranium' ),
+			'comparison' => __( 'Comparison', 'uranium' ),
 		),
 		'core/list'          => array(
-			'hairline' => __( 'Hairline rows', 'uranium' ),
+			'hairline'  => __( 'Hairline rows', 'uranium' ),
+			'checklist' => __( 'Checklist', 'uranium' ),
 		),
 		'core/post-template' => array(
 			'rows' => __( 'Hairline rows', 'uranium' ),

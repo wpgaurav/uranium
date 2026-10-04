@@ -79,8 +79,82 @@ function uranium_customize_register( $wp_customize ) {
 			'description' => __( "Only used when the color mode follows the visitor's device.", 'uranium' ),
 		)
 	);
+
+	$wp_customize->add_section(
+		'uranium_blog',
+		array(
+			'title'       => __( 'Uranium blog', 'uranium' ),
+			'description' => __( 'How article listings look and what follows each article.', 'uranium' ),
+			'priority'    => 31,
+		)
+	);
+
+	$wp_customize->add_setting(
+		'uranium_blog_layout',
+		array(
+			'default'           => 'rows',
+			'sanitize_callback' => 'uranium_sanitize_blog_layout',
+		)
+	);
+
+	$wp_customize->add_control(
+		'uranium_blog_layout',
+		array(
+			'type'        => 'radio',
+			'section'     => 'uranium_blog',
+			'label'       => __( 'Article listings', 'uranium' ),
+			'description' => __( 'Used on the blog, categories, tags and author pages. Search results always use rows.', 'uranium' ),
+			'choices'     => array(
+				'rows'  => __( 'Hairline rows', 'uranium' ),
+				'cards' => __( 'Cards with images, three across', 'uranium' ),
+			),
+		)
+	);
+
+	$toggles = array(
+		'uranium_post_author'   => __( 'Show the author note under each article when the author has a bio', 'uranium' ),
+		'uranium_related_posts' => __( 'Show up to three related articles from the same category', 'uranium' ),
+	);
+
+	foreach ( $toggles as $id => $label ) {
+		$wp_customize->add_setting(
+			$id,
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'rest_sanitize_boolean',
+			)
+		);
+
+		$wp_customize->add_control(
+			$id,
+			array(
+				'type'    => 'checkbox',
+				'section' => 'uranium_blog',
+				'label'   => $label,
+			)
+		);
+	}
 }
 add_action( 'customize_register', 'uranium_customize_register' );
+
+/**
+ * Returns the article listing layout: rows or cards.
+ *
+ * @return string
+ */
+function uranium_blog_layout() {
+	return uranium_sanitize_blog_layout( get_theme_mod( 'uranium_blog_layout', 'rows' ) );
+}
+
+/**
+ * Keeps the blog layout setting to a known value.
+ *
+ * @param string $value Submitted value.
+ * @return string
+ */
+function uranium_sanitize_blog_layout( $value ) {
+	return in_array( $value, array( 'rows', 'cards' ), true ) ? $value : 'rows';
+}
 
 /**
  * Keeps the palette setting to a known key.

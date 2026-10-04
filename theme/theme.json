@@ -39,10 +39,13 @@
 				"signal-hover": "#F0C900",
 				"signal-text": "#FFCC00",
 				"on-band-muted": "#BCC3B3",
+				"band-rule": "rgb(255 255 255 / 0.2)",
 				"control": "#7E8279",
 				"plate": "#F0F1EB",
+				"plate-light": "#FFFFFF",
 				"plate-ink": "#181A17",
 				"focus": "#375FA2",
+				"focus-on-band": "#8BB1FF",
 				"error": "#B32822",
 				"success": "#2E6B3A",
 				"info": "#375FA2"
@@ -309,6 +312,8 @@
 	},
 	"templateParts": [
 		{ "area": "header", "name": "header", "title": "Header" },
-		{ "area": "footer", "name": "footer", "title": "Footer" }
+		{ "area": "header", "name": "header-minimal", "title": "Header for landing pages" },
+		{ "area": "footer", "name": "footer", "title": "Footer" },
+		{ "area": "footer", "name": "footer-compact", "title": "Footer for landing pages" }
 	]
 }

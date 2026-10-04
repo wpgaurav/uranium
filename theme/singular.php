@@ -52,6 +52,10 @@ while ( have_posts() ) :
 					echo wp_kses_post( $uranium_tags );
 				}
 
+				if ( get_theme_mod( 'uranium_post_author', true ) ) {
+					get_template_part( 'template-parts/post', 'author' );
+				}
+
 				the_post_navigation(
 					array(
 						'prev_text' => '<span class="u-nav-label">' . esc_html__( 'Previous', 'uranium' ) . '</span><span class="u-nav-title">%title</span>',
@@ -63,6 +67,10 @@ while ( have_posts() ) :
 		<?php endif; ?>
 	</article>
 	<?php
+
+	if ( $uranium_is_post && get_theme_mod( 'uranium_related_posts', true ) ) {
+		get_template_part( 'template-parts/post', 'related' );
+	}
 
 	if ( comments_open() || get_comments_number() ) {
 		comments_template();

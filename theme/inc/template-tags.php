@@ -22,6 +22,33 @@ function uranium_page_heading( $args = array() ) {
 }
 
 /**
+ * Returns the template part a page renders in the header or footer area.
+ *
+ * Falls back to the area's own part when the requested one doesn't exist,
+ * so a part deleted in the Site Editor never leaves a page without a header.
+ *
+ * @param string $area      Either 'header' or 'footer'.
+ * @param string $requested The part slug a template asked for.
+ * @return string
+ */
+function uranium_template_part_name( $area, $requested ) {
+	/**
+	 * Filters the header or footer template part for the current page.
+	 *
+	 * The hook name is `uranium_header_part` or `uranium_footer_part`.
+	 *
+	 * @param string $part Template part slug.
+	 */
+	$part = sanitize_key( (string) apply_filters( "uranium_{$area}_part", $requested ) );
+
+	if ( ! $part || $part === $area ) {
+		return $area;
+	}
+
+	return get_block_template( get_stylesheet() . '//' . $part, 'wp_template_part' ) ? $part : $area;
+}
+
+/**
  * Returns the breadcrumb trail as label and URL pairs.
  *
  * @return array<int, array{label: string, url?: string}>
@@ -139,12 +166,21 @@ function uranium_breadcrumbs() {
 /**
  * Returns the mono meta line for a post: date and first category.
  *
+ * Pages, products and other types show their type instead, since a search
+ * result's publish date says little about a page or a product.
+ *
  * @param int|null $post_id Post ID, defaults to the current post.
  * @return string
  */
 function uranium_get_post_meta( $post_id = null ) {
 	$post_id = $post_id ? $post_id : get_the_ID();
 	$parts   = array();
+	$type    = get_post_type( $post_id );
+
+	if ( 'post' !== $type ) {
+		$object = get_post_type_object( $type );
+		return $object ? esc_html( $object->labels->singular_name ) : '';
+	}
 
 	if ( is_sticky( $post_id ) && ! is_singular() ) {
 		$parts[] = '<span class="u-meta-flag">' . esc_html__( 'Featured', 'uranium' ) . '</span>';
@@ -161,7 +197,8 @@ function uranium_get_post_meta( $post_id = null ) {
 		$parts[] = esc_html( $categories[0]->name );
 	}
 
-	if ( is_singular( 'post' ) ) {
+	// The byline belongs to the post being read, not to the related rows under it.
+	if ( is_singular( 'post' ) && (int) $post_id === get_queried_object_id() ) {
 		$parts[] = esc_html( get_the_author_meta( 'display_name', (int) get_post_field( 'post_author', $post_id ) ) );
 	}
 
